@@ -2,7 +2,7 @@
 
 
 - name: users | set root root_password
-  sudo: yes
+  become: yes
   user: >
     name=root
     password="{{ ffm_root_password }}"
@@ -10,13 +10,13 @@
 
 
 - name: users | add group deploy
-  sudo: yes
+  become: yes
   group: name={{ ffm_deploy_group }} state=present
   tags: setup
 
 
 - name: users | add user deploy
-  sudo: yes
+  become: yes
   user: >
     name={{ ffm_deploy_user }}
     group={{ ffm_deploy_group }}
@@ -27,7 +27,7 @@
 
 
 - name: users | copy ssh pub key to deployment user
-  sudo: yes
+  become: yes
   authorized_key: >
     user={{ ffm_deploy_user }}
     key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
@@ -36,7 +36,7 @@
 
 
 - name: users | enable sudoers.d
-  sudo: yes
+  become: yes
   lineinfile: >
     dest=/etc/sudoers
     regexp='^#includedir /etc/sudoers.d'
@@ -46,6 +46,6 @@
 
 
 - name: users | add deploy_user to sudoers
-  sudo: yes
+  become: yes
   template: src=user.j2 dest=/etc/sudoers.d/{{ ffm_deploy_user }} mode=0440
   tags: setup

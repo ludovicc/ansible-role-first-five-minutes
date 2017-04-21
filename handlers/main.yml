@@ -5,13 +5,13 @@
 # https://github.com/ansible/ansible-modules-core/issues/1170
 
 - name: restart sshd
-  sudo: yes
+  become: yes
   command: service ssh restart
 
 - name: restart unattended upgrades
-  sudo: yes
+  become: yes
   command: service unattended-upgrades restart
 
 - name: update timezone
-  sudo: yes
+  become: yes
   command: dpkg-reconfigure --frontend noninteractive tzdata

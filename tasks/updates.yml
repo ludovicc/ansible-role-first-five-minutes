@@ -4,13 +4,13 @@
 
 
 - name: updates | set update cache and safe upgrade
-  sudo: yes
+  become: yes
   apt:
     update_cache: yes
     cache_valid_time: 3600
 
 - name: updates | upgrade
-  sudo: yes
+  become: yes
   apt:
     update_cache: yes
     cache_valid_time: 3600
@@ -18,7 +18,7 @@
   when: ffm_upgrade != 'no'
 
 - name: updates | install common packages
-  sudo: yes
+  become: yes
   apt:
     pkg: "{{ item }}"
     state: present
@@ -28,7 +28,7 @@
   when:  ffm_common_packages is defined
 
 - name: updates | unattended upgrades
-  sudo: yes
+  become: yes
   apt:
     pkg: "unattended-upgrades"
     state: present
@@ -37,7 +37,7 @@
   when: ffm_upgrade != 'no'
 
 - name: updates | activate unattended upgrades
-  sudo: yes
+  become: yes
   template:
     src: updates/20auto-upgrades
     dest: /etc/apt/apt.conf.d/20auto-upgrades
