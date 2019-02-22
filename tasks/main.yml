@@ -1,12 +1,12 @@
 ---
 # file: main.yml
 
-- include: timezone.yml
-- include: updates.yml
-- include: users.yml
-- include: postfix.yml
-- include: logwatch.yml
-- include: notify.yml
-- include: fail2ban.yml
-- include: ufw.yml
-- include: auth.yml
+- import_tasks: timezone.yml
+- import_tasks: updates.yml
+- import_tasks: users.yml
+- import_tasks: postfix.yml
+- import_tasks: logwatch.yml
+- import_tasks: notify.yml
+- import_tasks: fail2ban.yml
+- import_tasks: ufw.yml
+- import_tasks: auth.yml
